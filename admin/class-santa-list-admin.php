@@ -44,6 +44,14 @@ class Santa_List_Admin {
             'santa-list-shortcodes',
             array( __CLASS__, 'page_shortcodes' )
         );
+        add_submenu_page(
+            'santa-list',
+            __( 'QR Code', 'santa-list' ),
+            __( '📱 QR Code', 'santa-list' ),
+            'manage_options',
+            'santa-list-qr',
+            array( __CLASS__, 'page_qr' )
+        );
     }
 
     public static function enqueue_assets( $hook ) {
@@ -405,6 +413,124 @@ class Santa_List_Admin {
                     <tr><td><code>GET <?php echo esc_html( rest_url( 'santa-list/v1/config' ) ); ?></code></td><td><?php esc_html_e( 'Returns display config for FPP (requires X-Santa-API-Key header).', 'santa-list' ); ?></td></tr>
                 </tbody>
             </table>
+        </div>
+        <?php
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  QR Code Page                                                        */
+    /* ------------------------------------------------------------------ */
+    public static function page_qr() {
+
+        // Find a page that uses our standalone template.
+        $pages = get_pages( array( 'meta_key' => '_wp_page_template', 'meta_value' => 'santa-list/public/page-santa-list.php' ) );
+        $page_url = ! empty( $pages ) ? get_permalink( $pages[0]->ID ) : '';
+
+        // Allow admin to manually paste a URL if the template page doesn't exist yet.
+        $manual = isset( $_GET['santa_qr_url'] ) ? esc_url_raw( wp_unslash( $_GET['santa_qr_url'] ) ) : '';
+        $target_url = $manual ?: $page_url;
+
+        $has_url = ! empty( $target_url );
+
+        // QR Server API — free, no key needed. Returns a clean SVG/PNG/JPG.
+        $qr_base = 'https://api.qrserver.com/v1/create-qr-code/';
+        $qr_size = 400; // pixels
+
+        $qr_svg_url = $has_url ? add_query_arg( array( 'size' => $qr_size . 'x' . $qr_size, 'format' => 'svg', 'data' => rawurlencode( $target_url ) ), $qr_base ) : '';
+        $qr_png_url = $has_url ? add_query_arg( array( 'size' => $qr_size . 'x' . $qr_size, 'format' => 'png', 'data' => rawurlencode( $target_url ) ), $qr_base ) : '';
+        $qr_jpg_url = $has_url ? add_query_arg( array( 'size' => $qr_size . 'x' . $qr_size, 'format' => 'jpg', 'data' => rawurlencode( $target_url ) ), $qr_base ) : '';
+
+        ?>
+        <div class="wrap santa-list-admin">
+            <h1>📱 <?php esc_html_e( "QR Code &amp; Share Link", 'santa-list' ); ?></h1>
+
+            <?php if ( ! $has_url ) : ?>
+            <div class="notice notice-warning">
+                <p>
+                    <?php esc_html_e( "No standalone Santa's List page found. Create a WordPress page and set its Template to \"Santa's List — Standalone\", then come back here.", 'santa-list' ); ?>
+                    <?php printf( '<a href="%s">%s</a>', esc_url( admin_url( 'post-new.php?post_type=page' ) ), esc_html__( 'Create a page now →', 'santa-list' ) ); ?>
+                </p>
+            </div>
+            <p><?php esc_html_e( 'Or paste your page URL below to generate a QR code for it:', 'santa-list' ); ?></p>
+            <form method="get" action="">
+                <input type="hidden" name="page" value="santa-list-qr">
+                <input type="url" name="santa_qr_url" placeholder="https://yoursite.com/santas-list/" style="width:420px;max-width:100%;padding:6px 10px;font-size:14px;" required>
+                <button type="submit" class="button button-primary"><?php esc_html_e( 'Generate QR Code', 'santa-list' ); ?></button>
+            </form>
+
+            <?php else : ?>
+
+            <div class="santa-qr-layout">
+
+                <!-- QR Code card -->
+                <div class="santa-card santa-qr-card">
+                    <h2><?php esc_html_e( 'Your QR Code', 'santa-list' ); ?></h2>
+                    <p class="santa-qr-url-display">
+                        <strong><?php esc_html_e( 'Links to:', 'santa-list' ); ?></strong>
+                        <a href="<?php echo esc_url( $target_url ); ?>" target="_blank"><?php echo esc_html( $target_url ); ?></a>
+                    </p>
+
+                    <div class="santa-qr-preview">
+                        <img src="<?php echo esc_url( $qr_png_url ); ?>"
+                             alt="<?php esc_attr_e( "Santa's List QR Code", 'santa-list' ); ?>"
+                             width="<?php echo esc_attr( $qr_size ); ?>"
+                             height="<?php echo esc_attr( $qr_size ); ?>">
+                    </div>
+
+                    <div class="santa-qr-downloads">
+                        <strong><?php esc_html_e( 'Download:', 'santa-list' ); ?></strong>
+                        <a href="<?php echo esc_url( $qr_svg_url ); ?>" download="santas-list-qr.svg" class="button">⬇ SVG</a>
+                        <a href="<?php echo esc_url( $qr_png_url ); ?>" download="santas-list-qr.png" class="button">⬇ PNG</a>
+                        <a href="<?php echo esc_url( $qr_jpg_url ); ?>" download="santas-list-qr.jpg" class="button">⬇ JPG</a>
+                    </div>
+                </div>
+
+                <!-- Page link card -->
+                <div class="santa-card santa-qr-link-card">
+                    <h2><?php esc_html_e( 'Share the Link', 'santa-list' ); ?></h2>
+                    <p><?php esc_html_e( 'Give people this URL directly or embed it anywhere:', 'santa-list' ); ?></p>
+                    <div class="santa-qr-copy-row">
+                        <input type="text" id="santa-qr-link" value="<?php echo esc_attr( $target_url ); ?>" readonly class="large-text">
+                        <button type="button" class="button" onclick="
+                            var el = document.getElementById('santa-qr-link');
+                            el.select();
+                            document.execCommand('copy');
+                            this.textContent = '✓ Copied!';
+                            var btn = this;
+                            setTimeout(function(){ btn.textContent = 'Copy'; }, 2000);
+                        "><?php esc_html_e( 'Copy', 'santa-list' ); ?></button>
+                    </div>
+
+                    <?php if ( ! empty( $pages ) ) : ?>
+                    <p style="margin-top:16px;">
+                        <a href="<?php echo esc_url( get_edit_post_link( $pages[0]->ID ) ); ?>" class="button">
+                            <?php esc_html_e( '✏️ Edit this page in WordPress', 'santa-list' ); ?>
+                        </a>
+                        <a href="<?php echo esc_url( $target_url ); ?>" target="_blank" class="button button-primary" style="margin-left:6px;">
+                            <?php esc_html_e( '👁 Preview page', 'santa-list' ); ?>
+                        </a>
+                    </p>
+                    <?php endif; ?>
+
+                    <hr>
+                    <p class="description"><?php esc_html_e( 'Using a different URL? Paste it here to regenerate:', 'santa-list' ); ?></p>
+                    <form method="get" action="">
+                        <input type="hidden" name="page" value="santa-list-qr">
+                        <input type="url" name="santa_qr_url" value="<?php echo esc_attr( $manual ); ?>"
+                               placeholder="<?php echo esc_attr( $page_url ); ?>"
+                               style="width:280px;max-width:100%;padding:5px 8px;">
+                        <button type="submit" class="button"><?php esc_html_e( 'Update', 'santa-list' ); ?></button>
+                        <?php if ( $manual ) : ?>
+                        <a href="<?php echo esc_url( admin_url( 'admin.php?page=santa-list-qr' ) ); ?>" class="button">
+                            <?php esc_html_e( '↩ Use page default', 'santa-list' ); ?>
+                        </a>
+                        <?php endif; ?>
+                    </form>
+                </div>
+
+            </div><!-- .santa-qr-layout -->
+
+            <?php endif; ?>
         </div>
         <?php
     }

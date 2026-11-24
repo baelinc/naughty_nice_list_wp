@@ -514,3 +514,78 @@
     .santa-list-stats { gap: 8px; }
     .santa-list-stat { min-width: calc(50% - 4px); }
 }
+
+/* ── QR Code Page ── */
+.santa-qr-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.santa-qr-card {
+    flex: 0 0 auto;
+    text-align: center;
+    min-width: 280px;
+}
+
+.santa-qr-link-card {
+    flex: 1 1 320px;
+}
+
+.santa-qr-preview {
+    display: inline-block;
+    padding: 16px;
+    background: #fff;
+    border: 2px solid #e8e0d0;
+    border-radius: 12px;
+    margin: 12px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.santa-qr-preview img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.santa-qr-downloads {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.santa-qr-downloads .button {
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.santa-qr-url-display {
+    font-size: 13px;
+    word-break: break-all;
+    background: #f9f5f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #e8e0d0;
+}
+
+.santa-qr-copy-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.santa-qr-copy-row input {
+    flex: 1;
+    background: #f9f5f0 !important;
+    cursor: text;
+}
+
+@media (max-width: 600px) {
+    .santa-qr-layout { flex-direction: column; }
+    .santa-qr-card { width: 100%; }
+}
