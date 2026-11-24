@@ -38,7 +38,7 @@ $custom_subtitle = get_post_meta( $page_id, '_santa_list_subtitle', true ) ?: 'A
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#8b0000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -223,18 +223,26 @@ $custom_subtitle = get_post_meta( $page_id, '_santa_list_subtitle', true ) ?: 'A
             color: #666;
             margin-bottom: 5px;
         }
-        .sl-field input[type="text"] {
+        .sl-field input[type="text"],
+        .sl-field input[type="tel"],
+        .sl-field input[type="email"],
+        .sl-field input[type="number"] {
             width: 100%;
             padding: 11px 14px;
+            min-height: 48px;   /* iOS tap-target minimum */
             border: 1.5px solid rgba(0,0,0,0.13);
             border-radius: 10px;
-            font-size: 1em;
+            font-size: 1em;     /* prevents iOS auto-zoom (keeps >= 16px) */
             color: #1a1a1a;
             background: #fff;
             transition: border-color 0.15s, box-shadow 0.15s;
             -webkit-appearance: none;
+            appearance: none;
         }
-        .sl-field input[type="text"]:focus {
+        .sl-field input[type="text"]:focus,
+        .sl-field input[type="tel"]:focus,
+        .sl-field input[type="email"]:focus,
+        .sl-field input[type="number"]:focus {
             border-color: #c0392b;
             box-shadow: 0 0 0 3px rgba(192,57,43,0.12);
             outline: none;
@@ -254,9 +262,11 @@ $custom_subtitle = get_post_meta( $page_id, '_santa_list_subtitle', true ) ?: 'A
             color: #666;
             margin-bottom: 8px;
         }
-        .sl-radio-group { display: flex; gap: 10px; margin-bottom: 16px; }
+        .sl-radio-group { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
         .sl-radio {
             flex: 1;
+            min-width: 120px;    /* wrap to new line rather than getting too narrow */
+            min-height: 52px;    /* comfortable tap target */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -269,6 +279,7 @@ $custom_subtitle = get_post_meta( $page_id, '_santa_list_subtitle', true ) ?: 'A
             font-weight: 600;
             transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.1s;
             user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .sl-radio input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
         .sl-radio:active { transform: scale(0.97); }
@@ -317,10 +328,23 @@ $custom_subtitle = get_post_meta( $page_id, '_santa_list_subtitle', true ) ?: 'A
         #wpadminbar { display: none !important; }
 
         /* ── Responsive ── */
-        @media (max-width: 400px) {
-            .sl-page-title { font-size: 1.4em; }
-            .sl-card-inner { padding: 18px 16px 16px; }
-            .sl-radio { padding: 11px 8px; font-size: 0.875em; }
+        /* Medium phones (≤480px) */
+        @media (max-width: 480px) {
+            .sl-page-wrap { padding: 16px 12px 32px; }
+            .sl-santa-icon { font-size: 3.2em; }
+            .sl-page-title { font-size: 1.55em; }
+            .sl-page-subtitle { font-size: 0.875em; }
+            .sl-card-inner { padding: 20px 18px 18px; }
+            .sl-submit { padding: 14px; font-size: 1em; }
+        }
+        /* Small phones (≤360px) */
+        @media (max-width: 360px) {
+            .sl-page-title { font-size: 1.3em; }
+            .sl-card-inner { padding: 16px 14px 14px; }
+            .sl-radio { padding: 10px 8px; font-size: 0.875em; min-width: 100px; }
+            /* Stack name fields vertically on very small screens */
+            .sl-field-row { flex-direction: column; gap: 0; }
+            .sl-field--narrow { flex: 1 1 auto; }
         }
     </style>
 </head>
