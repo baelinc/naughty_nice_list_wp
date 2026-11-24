@@ -1,0 +1,345 @@
+/* Santa's List - Public Stylesheet */
+
+/* ── Form wrapper ── */
+.santa-list-form-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    overflow: hidden;
+    font-family: inherit;
+}
+
+/* Festive top stripe */
+.santa-list-form-wrap::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, #c0392b 0%, #e74c3c 50%, #27ae60 100%);
+}
+
+.santa-list-form-inner {
+    padding: 28px 28px 24px;
+}
+
+/* ── Header ── */
+.santa-list-form-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.santa-list-form-icon {
+    font-size: 44px;
+    display: block;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.santa-list-form-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+}
+
+.santa-list-form-subtitle {
+    font-size: 0.875em;
+    color: #777;
+    margin: 0;
+}
+
+/* ── Fields ── */
+.santa-list-field-row {
+    display: flex;
+    gap: 12px;
+}
+
+.santa-list-field {
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.santa-list-field--narrow {
+    flex: 0 0 84px;
+}
+
+.santa-list-field label {
+    display: block;
+    font-size: 0.8125em;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 0.01em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.santa-list-field input[type="text"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid rgba(0,0,0,0.14);
+    border-radius: 8px;
+    font-size: 0.9375em;
+    color: #1a1a1a;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+.santa-list-field input[type="text"]:focus {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+}
+
+.santa-list-field input[type="text"].santa-initial {
+    text-align: center;
+    font-size: 1.125em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* ── List choice radio pills ── */
+.santa-list-radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+.santa-list-radio {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 12px;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.875em;
+    font-weight: 600;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    user-select: none;
+}
+
+.santa-list-radio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.santa-list-radio-icon {
+    font-size: 1.25em;
+}
+
+.santa-list-radio--nice:has(input:checked),
+.santa-list-radio--nice.santa-list-radio--selected,
+.santa-list-radio--nice:hover {
+    border-color: #27ae60;
+    background: #eafaf1;
+    color: #1a7a44;
+}
+
+.santa-list-radio--naughty:has(input:checked),
+.santa-list-radio--naughty.santa-list-radio--selected,
+.santa-list-radio--naughty:hover {
+    border-color: #c0392b;
+    background: #fdf2f0;
+    color: #922b21;
+}
+
+/* ── Code hint ── */
+.santa-list-code-hint {
+    font-size: 0.8125em;
+    color: #999;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ── Divider ── */
+.santa-list-divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    margin: 18px 0;
+}
+
+/* ── Submit button ── */
+.santa-list-submit {
+    width: 100%;
+    padding: 14px 20px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9375em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.01em;
+}
+
+.santa-list-submit:hover:not(:disabled) {
+    background: #a93226;
+}
+
+.santa-list-submit:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.santa-list-submit:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ── Notices ── */
+.santa-list-messages {
+    margin-bottom: 16px;
+}
+
+.santa-list-notice {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    line-height: 1.55;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.santa-list-notice--success {
+    background: #eafaf1;
+    border: 1px solid rgba(39,174,96,0.35);
+    color: #1a7a44;
+}
+
+.santa-list-notice--error {
+    background: #fdf2f0;
+    border: 1px solid rgba(192,57,43,0.3);
+    color: #922b21;
+}
+
+.santa-list-notice--info {
+    background: #eaf3fb;
+    border: 1px solid rgba(41,128,185,0.3);
+    color: #1a5276;
+}
+
+/* ── [santa_list_display] shortcode ── */
+.santa-list-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.santa-list-display__column {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.santa-list-display__header {
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.santa-list-display__icon {
+    font-size: 1.25em;
+}
+
+.santa-list-display__heading {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.santa-list-display__column--nice .santa-list-display__header {
+    background: #f4fdf7;
+}
+
+.santa-list-display__column--nice .santa-list-display__heading {
+    color: #1a7a44;
+}
+
+.santa-list-display__column--naughty .santa-list-display__header {
+    background: #fef9f8;
+}
+
+.santa-list-display__column--naughty .santa-list-display__heading {
+    color: #922b21;
+}
+
+.santa-list-display__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.santa-list-display__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 0.9375em;
+}
+
+.santa-list-display__list li:last-child {
+    border-bottom: none;
+}
+
+.santa-list-display__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6875em;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.santa-list-display__column--nice .santa-list-display__avatar {
+    background: #eafaf1;
+    color: #1a7a44;
+}
+
+.santa-list-display__column--naughty .santa-list-display__avatar {
+    background: #fdf2f0;
+    color: #922b21;
+}
+
+.santa-list-display__empty {
+    padding: 20px 18px;
+    text-align: center;
+    color: #bbb;
+    font-size: 0.875em;
+    font-style: italic;
+}
+
+/* ── [santa_list_count] shortcode ── */
+.santa-list-count {
+    font-weight: 700;
+    color: #c0392b;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+    .santa-list-form-inner { padding: 20px 16px 18px; }
+    .santa-list-field-row { flex-direction: column; }
+    .santa-list-field--narrow { flex: 1 0 auto; }
+    .santa-list-radio-group { flex-direction: column; }
+    .santa-list-display { grid-template-columns: 1fr; }
+}

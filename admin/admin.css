@@ -1,0 +1,516 @@
+/* Santa's List - Admin Stylesheet */
+
+/* ── Page layout ── */
+.santa-list-admin {
+    max-width: 900px;
+    margin: 24px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ── Admin header ── */
+.santa-list-admin-header {
+    background: linear-gradient(135deg, #c0392b 0%, #e74c3c 55%, #1a7a44 100%);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.santa-list-admin-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.santa-list-admin-header-icon {
+    font-size: 2.5em;
+    line-height: 1;
+}
+
+.santa-list-admin-header h1 {
+    color: #fff !important;
+    font-size: 1.5em !important;
+    font-weight: 700 !important;
+    margin: 0 0 2px !important;
+    padding: 0 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border: none !important;
+}
+
+.santa-list-admin-header p {
+    color: rgba(255,255,255,0.85);
+    margin: 0;
+    font-size: 0.875em;
+}
+
+/* ── Stat chips ── */
+.santa-list-stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.santa-list-stat {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 100px;
+    flex: 1;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.santa-list-stat__number {
+    font-size: 1.75em;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.santa-list-stat--total .santa-list-stat__number { color: #34495e; }
+.santa-list-stat--approved .santa-list-stat__number { color: #27ae60; }
+.santa-list-stat--pending .santa-list-stat__number { color: #f39c12; }
+.santa-list-stat--nice .santa-list-stat__number { color: #27ae60; }
+.santa-list-stat--naughty .santa-list-stat__number { color: #c0392b; }
+
+.santa-list-stat__label {
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #999;
+}
+
+/* ── Cards ── */
+.santa-list-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.santa-list-card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.santa-list-card-title {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.santa-list-card-body {
+    padding: 20px;
+}
+
+/* ── Entries table ── */
+.santa-list-entries-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875em;
+}
+
+.santa-list-entries-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #888;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    white-space: nowrap;
+}
+
+.santa-list-entries-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: #333;
+    vertical-align: middle;
+}
+
+.santa-list-entries-table tr:last-child td {
+    border-bottom: none;
+}
+
+.santa-list-entries-table tr:hover td {
+    background: #fafafa;
+}
+
+/* ── Badges ── */
+.santa-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8125em;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.santa-badge--nice {
+    background: #eafaf1;
+    color: #1a7a44;
+    border: 1px solid rgba(39,174,96,0.25);
+}
+
+.santa-badge--naughty {
+    background: #fdf2f0;
+    color: #922b21;
+    border: 1px solid rgba(192,57,43,0.25);
+}
+
+.santa-badge--approved {
+    background: #eafaf1;
+    color: #1a7a44;
+}
+
+.santa-badge--pending {
+    background: #fef9ec;
+    color: #9a6600;
+}
+
+.santa-badge--rejected {
+    background: #fdf2f0;
+    color: #922b21;
+}
+
+/* ── Action buttons in table ── */
+.santa-action-btn {
+    padding: 4px 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.8125em;
+    cursor: pointer;
+    transition: background 0.1s, border-color 0.1s;
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.santa-action-btn:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.santa-action-btn--danger {
+    color: #c0392b;
+    border-color: rgba(192,57,43,0.25);
+}
+
+.santa-action-btn--danger:hover {
+    background: #fdf2f0;
+    border-color: rgba(192,57,43,0.4);
+    color: #c0392b;
+}
+
+/* ── Settings form ── */
+.santa-settings-section {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.santa-settings-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.santa-settings-section-title {
+    font-size: 0.8125em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #aaa;
+    margin-bottom: 14px;
+}
+
+.santa-field-group {
+    margin-bottom: 16px;
+}
+
+.santa-field-group label {
+    display: block;
+    font-size: 0.875em;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.santa-field-group .description {
+    font-size: 0.8125em;
+    color: #888;
+    margin-top: 5px;
+}
+
+.santa-field-group input[type="text"],
+.santa-field-group input[type="number"],
+.santa-field-group select {
+    max-width: 400px;
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: #1a1a1a;
+    background: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.santa-field-group input:focus,
+.santa-field-group select:focus {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+    outline: none;
+}
+
+/* ── API key row ── */
+.santa-api-key-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    max-width: 480px;
+}
+
+.santa-api-key-row input[type="text"] {
+    flex: 1;
+    max-width: none;
+    font-family: "SFMono-Regular", "Consolas", monospace;
+    font-size: 0.8125em;
+    color: #555;
+}
+
+.santa-copy-btn {
+    padding: 9px 14px;
+    background: #f5f5f5;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875em;
+    color: #555;
+    white-space: nowrap;
+    transition: background 0.1s;
+}
+
+.santa-copy-btn:hover { background: #ebebeb; }
+.santa-copy-btn.copied { background: #eafaf1; color: #1a7a44; border-color: rgba(39,174,96,0.3); }
+
+/* ── Gate-mode radio pills ── */
+.santa-gate-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.santa-gate-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875em;
+    font-weight: 500;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.santa-gate-option input[type="radio"] {
+    margin: 0;
+    accent-color: #c0392b;
+}
+
+.santa-gate-option:has(input:checked) {
+    border-color: #c0392b;
+    background: #fdf2f0;
+    color: #922b21;
+    font-weight: 600;
+}
+
+/* ── Save button ── */
+.santa-save-btn {
+    padding: 12px 28px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9375em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.santa-save-btn:hover { background: #a93226; }
+.santa-save-btn:active { transform: scale(0.98); }
+
+/* ── Notices ── */
+.santa-list-notice {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.santa-list-notice--success {
+    background: #eafaf1;
+    border: 1px solid rgba(39,174,96,0.35);
+    color: #1a7a44;
+}
+
+.santa-list-notice--error {
+    background: #fdf2f0;
+    border: 1px solid rgba(192,57,43,0.3);
+    color: #922b21;
+}
+
+/* ── Tabs ── */
+.santa-tabs {
+    display: flex;
+    gap: 2px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.santa-tab {
+    padding: 10px 18px;
+    font-size: 0.875em;
+    font-weight: 600;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    text-decoration: none;
+    margin-bottom: -1px;
+}
+
+.santa-tab:hover { color: #c0392b; }
+.santa-tab.active { color: #c0392b; border-color: #c0392b; }
+
+/* ── Bulk action bar ── */
+.santa-bulk-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #fafafa;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    font-size: 0.875em;
+}
+
+.santa-bulk-select {
+    padding: 7px 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 6px;
+    font-size: 0.875em;
+    background: #fff;
+}
+
+.santa-bulk-apply {
+    padding: 7px 14px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 6px;
+    font-size: 0.875em;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+    transition: background 0.1s;
+}
+
+.santa-bulk-apply:hover { background: #f0f0f0; }
+
+.santa-bulk-count { color: #888; margin-left: auto; }
+
+/* ── Geofence map UI ── */
+.santa-geo-paste-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    max-width: 600px;
+    margin-bottom: 8px;
+}
+
+.santa-geo-paste-row input {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1.5px dashed rgba(192,57,43,0.4);
+    border-radius: 8px;
+    font-size: 0.875em;
+    color: #555;
+    background: #fef9f8;
+}
+
+.santa-geo-paste-row input:focus {
+    border-color: #c0392b;
+    background: #fff;
+    outline: none;
+}
+
+.santa-geo-fields {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.santa-geo-fields label {
+    font-size: 0.875em;
+    font-weight: 600;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.santa-geo-fields input[type="text"] {
+    padding: 8px 10px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 7px;
+    font-size: 0.875em;
+    font-family: "SFMono-Regular", "Consolas", monospace;
+    color: #1a1a1a;
+}
+
+.santa-geo-fields input[type="text"]:focus {
+    border-color: #c0392b;
+    box-shadow: 0 0 0 2px rgba(192,57,43,0.1);
+    outline: none;
+}
+
+#sl_geofence_map {
+    margin-top: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .santa-list-admin-header { flex-direction: column; text-align: center; }
+    .santa-list-stats { gap: 8px; }
+    .santa-list-stat { min-width: calc(50% - 4px); }
+}
